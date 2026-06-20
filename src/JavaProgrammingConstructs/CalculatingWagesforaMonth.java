@@ -10,7 +10,7 @@ public class CalculatingWagesforaMonth {
 
         int monthlyWage = EmpRatePerHour * FULL_DAY_HOURS * WorkingDays;
 
-        System.out.println("Monthly Wage = " + monthlyWage);
+        System.out.println("Monthly Wage = " + monthlyWage);git
     }
 
 }
