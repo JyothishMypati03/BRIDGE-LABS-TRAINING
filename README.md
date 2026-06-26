@@ -1,96 +1,92 @@
-## UC1 - Stock Account Management
+##  Account Debit Operation
 
 ### Description
 
-This use case implements a Stock Account Management program that reads stock details such as stock name, number of shares, and share price. It calculates the value of each stock and the total value of all stocks in the portfolio, then displays a stock report.
+This use case enhances the `Account` class by adding a `debit()` method that withdraws money from an account. The method ensures that the withdrawal amount does not exceed the available balance. If the debit amount is greater than the account balance, the transaction is cancelled and an appropriate message is displayed.
 
 ### Objectives
 
-* Read stock details from the user.
-* Calculate the value of each stock.
-* Calculate the total value of all stocks.
-* Store stock details using a `Stock` class.
-* Manage multiple stocks using a `StockPortfolio` class.
+* Create an `Account` class with account details.
+* Implement a `debit()` method to withdraw money.
+* Prevent withdrawals when the debit amount exceeds the account balance.
+* Display the updated account balance after each transaction.
+* Test the `debit()` method using the `AccountTest` class.
 
 ### Assumptions
 
-* The user enters the number of stocks.
-* Each stock has:
+* Each account has:
 
-    * Stock Name
-    * Number of Shares
-    * Share Price
-* Stock Value = Number of Shares × Share Price
+    * Account Holder Name
+    * Account Balance
+* The withdrawal amount cannot exceed the available balance.
+* The account balance remains unchanged if the debit amount is greater than the available balance.
 
 ### Algorithm
 
-1. Create a `Stock` class to store stock details.
-2. Create a `StockPortfolio` class to maintain a list of stocks.
-3. Read the number of stocks from the user.
-4. For each stock:
+1. Create an `Account` class with account holder name and balance.
+2. Create a constructor to initialize the account details.
+3. Create a `debit()` method.
+4. Compare the debit amount with the available balance.
+5. If the debit amount is less than or equal to the balance:
 
-    * Read the stock name.
-    * Read the number of shares.
-    * Read the share price.
-    * Add the stock to the portfolio.
-5. Calculate the value of each stock.
-6. Calculate the total value of all stocks.
-7. Display the stock report.
+    * Deduct the amount from the balance.
+6. Otherwise:
+
+    * Display the message **"Debit amount exceeded account balance."**
+    * Keep the balance unchanged.
+7. Create an `AccountTest` class.
+8. Read account details and debit amount from the user.
+9. Call the `debit()` method and display the updated balance.
 
 ### Classes Used
 
 ```java
-Stock
-StockPortfolio
-StockReport
+Account
+AccountTest
 ```
 
 ### Important Methods
 
 ```java
-public double calculateStockValue()
+public void debit(double amount)
 
-public void addStock(Stock stock)
-
-public void printReport()
+public double getBalance()
 ```
 
 ### Benefits
 
-* Demonstrates object-oriented programming using classes and objects.
-* Organizes stock information efficiently.
-* Calculates individual stock values and total portfolio value.
-* Makes the application easy to maintain and extend.
-* Supports managing multiple stocks.
+* Demonstrates encapsulation using classes and objects.
+* Prevents invalid withdrawal transactions.
+* Protects the account from overdrawing.
+* Improves code readability and maintainability.
+* Follows object-oriented programming principles.
 
 ### Sample Output
 
 ```text
-Enter Number of Stocks : 2
+Enter Account Holder Name : Jyothish
+Enter Initial Balance : 10000
 
-Enter Details of Stock 1
-Stock Name : TCS
-Number of Shares : 100
-Share Price : 3500
+Account Holder : Jyothish
+Current Balance : 10000.0
 
-Enter Details of Stock 2
-Stock Name : Infosys
-Number of Shares : 50
-Share Price : 1600
+Enter Amount to Withdraw : 2500
 
-========== STOCK REPORT ==========
---------------------------------
-Stock Name      : TCS
-No. of Shares   : 100
-Share Price     : 3500.0
-Stock Value     : 350000.0
---------------------------------
-Stock Name      : Infosys
-No. of Shares   : 50
-Share Price     : 1600.0
-Stock Value     : 80000.0
---------------------------------
-Total Stock Value : 430000.0
+Amount Debited Successfully.
+Available Balance : 7500.0
 ```
 
-**Note:** The total stock value is calculated by summing the values of all individual stocks entered by the user.
+### Sample Output (Insufficient Balance)
+
+```text
+Enter Account Holder Name : Jyothish
+Enter Initial Balance : 10000
+
+Account Holder : Jyothish
+Current Balance : 10000.0
+
+Enter Amount to Withdraw : 15000
+
+Debit amount exceeded account balance.
+Available Balance : 10000.0
+```
