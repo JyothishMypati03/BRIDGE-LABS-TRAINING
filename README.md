@@ -1,92 +1,110 @@
-##  Account Debit Operation
+##  Commercial Data Processing
 
 ### Description
 
-This use case enhances the `Account` class by adding a `debit()` method that withdraws money from an account. The method ensures that the withdrawal amount does not exceed the available balance. If the debit amount is greater than the account balance, the transaction is cancelled and an appropriate message is displayed.
+This use case implements a **Stock Account Management System** that can be used by a financial institution to maintain customer stock information. The application allows customers to buy and sell company shares while maintaining the transaction date and time for every operation. The `StockAccount` class manages a list of `CompanyShares` objects and updates the portfolio whenever a transaction is performed.
 
 ### Objectives
 
-* Create an `Account` class with account details.
-* Implement a `debit()` method to withdraw money.
-* Prevent withdrawals when the debit amount exceeds the account balance.
-* Display the updated account balance after each transaction.
-* Test the `debit()` method using the `AccountTest` class.
+* Create a Stock Account for a customer.
+* Buy company shares.
+* Sell company shares.
+* Maintain a list of company shares.
+* Record the date and time of every transaction.
+* Display the customer's stock portfolio.
 
 ### Assumptions
 
-* Each account has:
+* Each customer has:
 
-    * Account Holder Name
+    * Customer Name
     * Account Balance
-* The withdrawal amount cannot exceed the available balance.
-* The account balance remains unchanged if the debit amount is greater than the available balance.
+* Each company share contains:
+
+    * Stock Symbol
+    * Number of Shares
+    * Transaction Date and Time
+* Shares can be purchased only if sufficient balance is available.
+* Shares can be sold only if enough shares are owned.
 
 ### Algorithm
 
-1. Create an `Account` class with account holder name and balance.
-2. Create a constructor to initialize the account details.
-3. Create a `debit()` method.
-4. Compare the debit amount with the available balance.
-5. If the debit amount is less than or equal to the balance:
+1. Create a `CompanyShares` class to store stock details.
+2. Create a `StockAccount` class to maintain customer information.
+3. Store company shares using an `ArrayList`.
+4. Create a `buy()` method:
 
-    * Deduct the amount from the balance.
-6. Otherwise:
+    * Check whether sufficient balance is available.
+    * If the stock already exists, update the number of shares.
+    * Otherwise, create a new `CompanyShares` object.
+    * Update the transaction date and time.
+5. Create a `sell()` method:
 
-    * Display the message **"Debit amount exceeded account balance."**
-    * Keep the balance unchanged.
-7. Create an `AccountTest` class.
-8. Read account details and debit amount from the user.
-9. Call the `debit()` method and display the updated balance.
+    * Check whether the customer owns the stock.
+    * Verify that sufficient shares are available.
+    * Reduce the number of shares.
+    * Update the account balance.
+    * Update the transaction date and time.
+6. Display the complete stock portfolio.
+7. Provide a menu-driven program to perform buy, sell, and display operations.
 
 ### Classes Used
 
 ```java
-Account
-AccountTest
+CompanyShares
+StockAccount
+CommercialDriver
 ```
 
 ### Important Methods
 
 ```java
-public void debit(double amount)
+public void buy(String stockSymbol, int numberOfShares, double sharePrice)
 
-public double getBalance()
+public void sell(String stockSymbol, int numberOfShares, double sharePrice)
+
+public void displayPortfolio()
 ```
 
 ### Benefits
 
-* Demonstrates encapsulation using classes and objects.
-* Prevents invalid withdrawal transactions.
-* Protects the account from overdrawing.
-* Improves code readability and maintainability.
-* Follows object-oriented programming principles.
+* Demonstrates object-oriented programming using classes and objects.
+* Maintains customer stock information efficiently.
+* Supports buying and selling company shares.
+* Records the latest transaction date and time.
+* Makes the application easy to extend and maintain.
 
 ### Sample Output
 
 ```text
-Enter Account Holder Name : Jyothish
-Enter Initial Balance : 10000
+Enter Customer Name : Jyothish
+Enter Initial Balance : 100000
 
-Account Holder : Jyothish
-Current Balance : 10000.0
+========== STOCK ACCOUNT MENU ==========
+1. Buy Shares
+2. Sell Shares
+3. Display Portfolio
+4. Display Balance
+5. Exit
 
-Enter Amount to Withdraw : 2500
+Enter Your Choice : 1
 
-Amount Debited Successfully.
-Available Balance : 7500.0
+Enter Stock Symbol : TCS
+Enter Number of Shares : 20
+Enter Share Price : 3500
+
+Shares purchased successfully.
+
+========== STOCK ACCOUNT ==========
+Customer Name : Jyothish
+Balance       : 30000.0
+
+------ COMPANY SHARES ------
+----------------------------
+Stock Symbol       : TCS
+Number of Shares   : 20
+Transaction Time   : 2026-06-26T11:15:42
+----------------------------
 ```
 
-### Sample Output (Insufficient Balance)
-
-```text
-Enter Account Holder Name : Jyothish
-Enter Initial Balance : 10000
-
-Account Holder : Jyothish
-Current Balance : 10000.0
-
-Enter Amount to Withdraw : 15000
-
-Debit amount exceeded account balance.
-Available Balance : 10000.0
-```
+**Note:** The transaction date and time are updated automatically whenever shares are bought or sold. The program prevents buying shares without sufficient balance and selling more shares than are available.
