@@ -1,110 +1,94 @@
-##  Commercial Data Processing
+## Deck of Cards
 
 ### Description
 
-This use case implements a **Stock Account Management System** that can be used by a financial institution to maintain customer stock information. The application allows customers to buy and sell company shares while maintaining the transaction date and time for every operation. The `StockAccount` class manages a list of `CompanyShares` objects and updates the portfolio whenever a transaction is performed.
+This use case implements a Deck of Cards program that initializes a standard deck of 52 playing cards using four suits and thirteen ranks. The deck is shuffled using the `Random` class, and 9 cards are distributed to each of 4 players using a two-dimensional array.
 
 ### Objectives
 
-* Create a Stock Account for a customer.
-* Buy company shares.
-* Sell company shares.
-* Maintain a list of company shares.
-* Record the date and time of every transaction.
-* Display the customer's stock portfolio.
+* Initialize a standard deck of 52 cards.
+* Shuffle the deck randomly.
+* Distribute 9 cards to each of 4 players.
+* Store the distributed cards using a 2D array.
+* Display the cards received by each player.
 
 ### Assumptions
 
-* Each customer has:
+* The deck contains 52 unique cards.
+* Suits:
 
-    * Customer Name
-    * Account Balance
-* Each company share contains:
+    * Clubs
+    * Diamonds
+    * Hearts
+    * Spades
+* Ranks:
 
-    * Stock Symbol
-    * Number of Shares
-    * Transaction Date and Time
-* Shares can be purchased only if sufficient balance is available.
-* Shares can be sold only if enough shares are owned.
+    * 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King, Ace
+* Each player receives exactly 9 cards.
+* The remaining cards are left unused.
 
 ### Algorithm
 
-1. Create a `CompanyShares` class to store stock details.
-2. Create a `StockAccount` class to maintain customer information.
-3. Store company shares using an `ArrayList`.
-4. Create a `buy()` method:
-
-    * Check whether sufficient balance is available.
-    * If the stock already exists, update the number of shares.
-    * Otherwise, create a new `CompanyShares` object.
-    * Update the transaction date and time.
-5. Create a `sell()` method:
-
-    * Check whether the customer owns the stock.
-    * Verify that sufficient shares are available.
-    * Reduce the number of shares.
-    * Update the account balance.
-    * Update the transaction date and time.
-6. Display the complete stock portfolio.
-7. Provide a menu-driven program to perform buy, sell, and display operations.
+1. Create arrays for suits and ranks.
+2. Initialize a deck of 52 cards by combining every rank with every suit.
+3. Shuffle the deck using the `Random` class.
+4. Create a 2D array of size `4 × 9` to represent 4 players and their cards.
+5. Distribute the first 36 shuffled cards among the players.
+6. Display the cards received by each player.
 
 ### Classes Used
 
 ```java
-CompanyShares
-StockAccount
-CommercialDriver
+DeckOfCards
 ```
 
-### Important Methods
+### Important Concepts
 
 ```java
-public void buy(String stockSymbol, int numberOfShares, double sharePrice)
-
-public void sell(String stockSymbol, int numberOfShares, double sharePrice)
-
-public void displayPortfolio()
+Random
+Arrays
+2D Array
+Nested Loops
 ```
 
 ### Benefits
 
-* Demonstrates object-oriented programming using classes and objects.
-* Maintains customer stock information efficiently.
-* Supports buying and selling company shares.
-* Records the latest transaction date and time.
-* Makes the application easy to extend and maintain.
+* Demonstrates the use of arrays and two-dimensional arrays.
+* Implements random shuffling of data.
+* Simulates real-world card distribution.
+* Improves understanding of nested loops and array manipulation.
+* Provides a foundation for card game applications.
 
 ### Sample Output
 
 ```text
-Enter Customer Name : Jyothish
-Enter Initial Balance : 100000
+Player 1 Cards
+--------------------------
+King of Hearts
+4 of Clubs
+Ace of Spades
+10 of Diamonds
+2 of Hearts
+Queen of Clubs
+9 of Spades
+5 of Diamonds
+Jack of Hearts
 
-========== STOCK ACCOUNT MENU ==========
-1. Buy Shares
-2. Sell Shares
-3. Display Portfolio
-4. Display Balance
-5. Exit
+Player 2 Cards
+--------------------------
+3 of Clubs
+Ace of Diamonds
+7 of Hearts
+King of Clubs
+8 of Spades
+10 of Hearts
+5 of Clubs
+Queen of Diamonds
+2 of Spades
 
-Enter Your Choice : 1
-
-Enter Stock Symbol : TCS
-Enter Number of Shares : 20
-Enter Share Price : 3500
-
-Shares purchased successfully.
-
-========== STOCK ACCOUNT ==========
-Customer Name : Jyothish
-Balance       : 30000.0
-
------- COMPANY SHARES ------
-----------------------------
-Stock Symbol       : TCS
-Number of Shares   : 20
-Transaction Time   : 2026-06-26T11:15:42
-----------------------------
+Player 3 Cards
+--------------------------
+...
 ```
 
-**Note:** The transaction date and time are updated automatically whenever shares are bought or sold. The program prevents buying shares without sufficient balance and selling more shares than are available.
+**Note:** The output will vary each time the program is executed because the deck is shuffled randomly before distributing the cards.
